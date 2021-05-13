@@ -1,11 +1,11 @@
-import grpc
-from concurrent import futures
-import time
-import api_pb2 as api_pb2
-import api_pb2_grpc as api_pb2_grpc
 import os
+import time
+from concurrent import futures
 
-PORT = 8000
+import grpc
+
+from consts import PORT, SERVER_CERT, SERVER_PRIVATE_KEY
+from grpc_generated_files import api_pb2, api_pb2_grpc
 
 
 class ChatBox(api_pb2_grpc.ApiServicer):
@@ -18,9 +18,9 @@ class ChatBox(api_pb2_grpc.ApiServicer):
 if __name__=="__main__":
     # creating the server
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=os.cpu_count()))
-    with open('./server.key', 'rb') as f:
+    with open(SERVER_PRIVATE_KEY, 'rb') as f:
         private_key = f.read()
-    with open('./server.crt', 'rb') as f:
+    with open(SERVER_CERT, 'rb') as f:
         certificate = f.read()
     server_creds = grpc.ssl_server_credentials(
         ((private_key, certificate), )

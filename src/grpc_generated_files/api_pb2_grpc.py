@@ -2,7 +2,7 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-import api_pb2 as api__pb2
+from grpc_generated_files import api_pb2 as api__pb2
 
 
 class ApiStub(object):
