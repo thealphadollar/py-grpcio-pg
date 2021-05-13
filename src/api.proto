@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+service Api {
+    rpc ApiEndpoint(ApiRequest) returns (ApiResponse);
+}
+
+message ApiRequest {
+    string name = 1;
+    string message = 2;
+}
+
+message ApiResponse {
+    string response = 1;
+}
