@@ -30,9 +30,9 @@ if __name__=="__main__":
     api_pb2_grpc.add_ApiServicer_to_server(ChatBox(), server=server)
     
     # listen
-    print(f"Starting to listen on {PORT}")
     server.add_secure_port(f'0.0.0.0:{PORT}', server_creds)
     server.start()
+    print(f"listening on {PORT}")
     
     try:
         while True:
